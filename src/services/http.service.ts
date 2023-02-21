@@ -4,8 +4,10 @@ import axios from "axios";
 //     '/api'
 //     : '//localhost:3030/api/'
 
-
-    const BASE_URL= '//localhost:3030/'
+    const BASE_URL: string = (process.env.NODE_ENV === 'production') ?
+    '/'
+    : '//localhost:3030/'
+    // const BASE_URL= '//localhost:3030/'
 
 
 // const axios = Axios.create({

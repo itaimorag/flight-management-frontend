@@ -1,6 +1,10 @@
 import { useEffect } from 'react'
+import { Flight } from '../interfaces/flight.interface'
+type Props = {
+    flight: Flight
+}
 
-export const FlightPreview = ({flight}) => {
+export const FlightPreview: React.FC<Props> = ({flight}) => {
 
     useEffect(() => {
    console.log(`flight = `, flight)

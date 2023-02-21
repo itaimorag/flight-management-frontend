@@ -1,9 +1,13 @@
 
-import { useEffect,useState } from 'react'
+import { useEffect } from 'react'
+import { Flight } from '../interfaces/flight.interface'
 import { FlightPreview } from './FlightPreview'
-// import { Flight }  from '../interfaces/flight.interface'
-// import { Flight } from './interfaces/flight.interface'
-export const FlightList = ({flights}) => {
+
+type Props = {
+    flights: Flight[]
+}
+
+export const FlightList: React.FC<Props> = ({flights}) => {
 
     useEffect(() => {
 
