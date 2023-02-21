@@ -1,0 +1,17 @@
+.flight-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 35px;
+
+    label {
+        font-size: 18px;
+    }
+
+    input {
+        width: 50%;
+        padding: 10px 15px;
+        border-radius: 10px;
+    }
+}

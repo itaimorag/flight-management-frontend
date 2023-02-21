@@ -7,25 +7,33 @@ type Props = {
     flights: Flight[]
 }
 
-export const FlightList: React.FC<Props> = ({flights}) => {
+export const FlightList: React.FC<Props> = ({ flights }) => {
 
     useEffect(() => {
 
     }, [])
 
-    // const { model, type } = robot
-    
     return (
         <section className='flight-list'>
-            {/* {JSON.stringify(flights)} */}
+            <table>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Status</th>
+                    <th>Takeoff Time</th>
+                    <th>Landing Time</th>
+                    <th>Takeoff Airport</th>
+                    <th>Landing Airport</th>
+                </tr>
+                    {flights?.map((flight) =>
+               
+                        <FlightPreview
+                            key={flight.flightNumber}
+                            flight={flight}
+                        />
+               
+                    )}
+            </table>
 
-            {flights?.map((flight) =>
-                <FlightPreview
-                    key={flight.flightNumber}
-                    flight={flight}
-                />
-            )}
-          
         </section>
     )
 }

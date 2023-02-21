@@ -18,8 +18,8 @@ export const FlightFilter: React.FC<Props>=({filterBy,onChangeFilter})=>  {
     
     return (
         <section className='flight-filter'>        
-                    <label htmlFor="filterBy">Filter here by: flight number /takeoff/landing airport. </label>
-                    <input onChange={(ev) =>handleChange(ev)} value={filterBy} type="text" id="filterBy" placeholder='Type here to filter'/>      
+                    <label htmlFor="filterBy">Filter here by: flight number/takeoff & landing airport. </label>
+                    <input className='search-input' ref={inputRef} onChange={(ev) =>handleChange(ev)} value={filterBy} type="text" id="filterBy" placeholder='Type here to filter'/>      
             </section>
         )
     }

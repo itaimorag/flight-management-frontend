@@ -22,20 +22,6 @@ function createSocketService() {
     on(eventName:string, cb:any) {
       socket?.on(eventName, cb)
     },
-    off(eventName:string, cb = null) {
-      if (!socket) return;
-      if (!cb) socket.removeAllListeners(eventName)
-      else socket.off(eventName, cb)
-    },
-    emit(eventName:string, data:any) {
-      if(!data) {
-        socket?.emit(eventName)
-        return
-      }
-      data = JSON.parse(JSON.stringify(data))
-      socket?.emit(eventName, data)
-    },
-   
   }
   return socketService
 }

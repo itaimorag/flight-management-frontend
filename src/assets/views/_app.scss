@@ -1,0 +1,18 @@
+.main-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    padding: 25px 26px 16px 26px;
+    background-color: rgba(141, 240, 245, 0.446);
+
+    .main-container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        color: #ffff;
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.635);
+    }
+}
