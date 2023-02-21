@@ -5,50 +5,48 @@ import { observer } from 'mobx-react'
 import { realFlightStore } from './store/flight.store';
 import { flightService } from './services/flight.service'
 import { Flight } from './interfaces/flight.interface'
-import { FlightList } from './cmps/FlightList.jsx'
+import { FlightList } from './cmps/FlightList'
 import { utilService } from './services/util.service'
 import { socketService, SOCKET_EVENT_FLIGHT_UPDATE } from './services/socket.service'
+import { FlightFilter } from './cmps/FlightFilter';
+
+
 
 function App() {
-  const [flights, setFlights] = useState<Flight[]>([])
-   const FlightStore=realFlightStore
-   
+  // const [flights, setFlights] = useState<Flight[]>([])
+  //  const FlightStore=realFlightStore
+
   useEffect(() => {
-    let newFlights: SetStateAction<Flight[]>
+    realFlightStore.startFlights()
+console.log(`realFlightStore.flights = `, realFlightStore.filteredFlights)
     //need to unmark for the socket to run
     // socketService.on(SOCKET_EVENT_FLIGHT_UPDATE,(flight:Flight)=>{
-    //      let updatedFlightIdx=flights.findIndex((currFlight)=>currFlight.flightNumber===flight.flightNumber)
-    //     //  console.log(`foo = `)
-    //      if(updatedFlightIdx>=0){
-    //       console.log(`flights[] = `, flights[updatedFlightIdx]+'|||'+flight)
-    //       let newFlights=flights
-    //       newFlights[updatedFlightIdx]=flight
-    //       setFlights([...newFlights])
-    //      }
+    // realFlightStore.updateFlights(flight)
     // })
-    const fetchData = async () => {
-      const data: any = await flightService.query('');
-      setFlights([...data.flights])
-      return data
-    }
-    fetchData()
-  }, [])
+
+  },[])
+
+  const onChangeFilter=(value:string)=>{
+    realFlightStore.updateFlightFilter(value)
+  }
 
 
   //need to change mabey
-  if (!flights.length) {
+  if (!realFlightStore.filteredFlights) {
     return (
       <div className="App">Loading...</div>
     )
 
-  } else {
+  } 
 
     return (
+
       <div className="App">
-        <FlightList flights={flights} />
+        <FlightFilter filterBy={realFlightStore.filterBy} onChangeFilter={onChangeFilter}/>
+        <FlightList flights={realFlightStore.filteredFlights} />
       </div>
     )
   }
-}
 
-export default App
+
+export default observer(App)

@@ -13,11 +13,11 @@ export const flightService = {
 //needs to delete!!!!!
 var gFlights:Flight[]
 
-async function query(term:string|undefined):Promise<Flight[] >{
-    const flights:Flight[] = await httpService.get(STORAGE_KEY,term)
+async function query(term:string|undefined):Promise<Flight[]>{
+    const flights = await httpService.get(STORAGE_KEY,term)
     // console.log(`flights = `, flights)
-    gFlights=flights
-    return flights
+    gFlights=flights.flights
+    return flights.flights
 }
 
 function getByFlightNumber(givenFlightNumber: string):Flight|undefined {

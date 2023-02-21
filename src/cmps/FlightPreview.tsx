@@ -7,7 +7,7 @@ type Props = {
 export const FlightPreview: React.FC<Props> = ({flight}) => {
 
     useEffect(() => {
-   console.log(`flight = `, flight)
+//    console.log(`flight = `, flight)
     }, [])
 
     // const { model, type } = robot
