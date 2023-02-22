@@ -7,21 +7,12 @@ const STORAGE_KEY = 'flights'
 
 export const flightService = {
     query,
-    getByFlightNumber,
-
 }
-//needs to delete!!!!!
-var gFlights:Flight[]
 
 async function query(term:string|undefined):Promise<Flight[]>{
     const flights = await httpService.get(STORAGE_KEY,term)
-    // console.log(`flights = `, flights)
-    gFlights=flights.flights
     return flights.flights
 }
 
-function getByFlightNumber(givenFlightNumber: string):Flight|undefined {
-    return gFlights.find((flight)=>flight.flightNumber===givenFlightNumber)
-}
 
 

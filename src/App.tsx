@@ -6,19 +6,18 @@ import { realFlightStore } from './store/flight.store';
 import { socketService, SOCKET_EVENT_FLIGHT_UPDATE } from './services/socket.service'
 import { Flight } from './interfaces/flight.interface';
 
-import { AppHeader } from './cmps/AppHeadet';
+import { AppHeader } from './cmps/AppHeader';
 import { FlightList } from './cmps/FlightList'
 import { FlightFilter } from './cmps/FlightFilter';
 
 
 function App() {
   useEffect(() => {
+    //you can delete the setTimeout, its only for the loader
     setTimeout(()=>{
-
       realFlightStore.startFlights()
     },2000)
-    // console.log(`realFlightStore.flights = `, realFlightStore.filteredFlights)
-    // need to unmark for the socket to run
+    
     socketService.on(SOCKET_EVENT_FLIGHT_UPDATE,(flight:Flight)=>{
     realFlightStore.updateFlights(flight)
     })
@@ -29,7 +28,13 @@ function App() {
     realFlightStore.updateFlightFilter(value)
   }
 
-  if (!realFlightStore.filteredFlights) return (<div className="main-app">Loading...</div>)
+  if (!realFlightStore.filteredFlights) return (<div className="main-app"><section className="loader-container">
+  <div className="loader">
+      <div className="inner one"></div>
+      <div className="inner two"></div>
+      <div className="inner three"></div>
+  </div>
+</section></div>)
 
   return (
     <div className="main-app">

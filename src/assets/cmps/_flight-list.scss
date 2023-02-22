@@ -1,5 +1,6 @@
 .flight-list{
     background-color: #ffffff;
+
     color: black;
     padding: 5px 10px;
     margin:0 auto ;
@@ -7,9 +8,13 @@
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
-      }
-      
-      tr:nth-child(even) {
+    }
+    
+    tr:nth-child(even) {
         background-color: #dddddd;
+    }
+    @media (min-width:1700px) {
+          min-width: 1270px;
+        
       }
 }

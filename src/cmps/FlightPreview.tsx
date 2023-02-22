@@ -6,18 +6,27 @@ type Props = {
 
 export const FlightPreview: React.FC<Props> = ({flight}) => {
 
-    useEffect(() => {
-//    console.log(`flight = `, flight)
-    }, [])
-
-    // const { model, type } = robot
+    let statusClass;
+    switch (flight.status) {
+      case 'hangar':
+        statusClass = 'hangar';
+        break;
+      case 'airborne':
+        statusClass = 'airborne';
+        break;
+      case 'malfunction':
+        statusClass = 'malfunction';
+        break;
+      default:
+        statusClass = '';
+    }
     
     return (
         
         <tr className='flight-preview'>
 
             <td>{flight.flightNumber}</td>
-            <td>{flight.status}</td>
+            <td className={statusClass}>{flight.status}</td>
             <td>{flight.takeoffTime}</td>
             <td>{flight.landingTime}</td>
             <td>{flight.takeoffAirport}</td>
