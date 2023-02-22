@@ -16,11 +16,11 @@ function App() {
   useEffect(() => {
     //you can delete the setTimeout, its only for the loader
     // setTimeout(()=>{
-      realFlightStore.startFlights()
+    realFlightStore.startFlights()
     // },2000)
-    
-    socketService.on(SOCKET_EVENT_FLIGHT_UPDATE,(flight:Flight)=>{
-    realFlightStore.updateFlights(flight)
+
+    socketService.on(SOCKET_EVENT_FLIGHT_UPDATE, (flight: Flight) => {
+      realFlightStore.updateFlights(flight)
     })
 
   }, [])
@@ -30,19 +30,20 @@ function App() {
   }
 
   if (!realFlightStore.filteredFlights) return (<div className="main-app"><section className="loader-container">
-  <div className="loader">
+    <div className="loader">
       <div className="inner one"></div>
       <div className="inner two"></div>
       <div className="inner three"></div>
-  </div>
-</section></div>)
+    </div>
+  </section></div>)
 
   return (
     <div className="main-app">
       <AppHeader />
       <div className='main-container'>
         <FlightFilter filterBy={realFlightStore.filterBy} onChangeFilter={onChangeFilter} />
-      <StickyHeadTable />
+        <StickyHeadTable />
+        {/* im not deleting the components of flight list and flight preview so you could look at them if you would like :) */}
         {/* <FlightList flights={realFlightStore.filteredFlights} /> */}
       </div>
     </div>

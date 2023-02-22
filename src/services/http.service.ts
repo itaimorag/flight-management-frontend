@@ -1,35 +1,25 @@
 import axios from "axios";
 
-// const BASE_URL: string = (process.env.NODE_ENV === 'production') ?
-//     '/api'
-//     : '//localhost:3030/api/'
-
-    const BASE_URL: string = (process.env.NODE_ENV === 'production') ?
+const BASE_URL: string = (process.env.NODE_ENV === 'production') ?
     '/'
     : '//localhost:3030/'
-    // const BASE_URL= '//localhost:3030/'
-
-
-// const axios = Axios.create({
-//     withCredentials: true
-// })
 
 export const httpService = {
-    get(endpoint: string, data:string | null = null) {
+    get(endpoint: string, data: string | null = null) {
         return ajax(endpoint, 'GET', data)
     },
-    post(endpoint: string, data:string | null = null) {
+    post(endpoint: string, data: string | null = null) {
         return ajax(endpoint, 'POST', data)
     },
-    put(endpoint: string, data:string | null = null) {
+    put(endpoint: string, data: string | null = null) {
         return ajax(endpoint, 'PUT', data)
     },
-    delete(endpoint: string, data:string | null = null) {
+    delete(endpoint: string, data: string | null = null) {
         return ajax(endpoint, 'DELETE', data)
     }
 }
 
-async function ajax(endpoint: string, method = 'GET', data:string | null = null) {
+async function ajax(endpoint: string, method = 'GET', data: string | null = null) {
     try {
         const res = await axios({
             url: `${BASE_URL}${endpoint}`,

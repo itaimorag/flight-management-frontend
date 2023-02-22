@@ -1,8 +1,5 @@
 import { Flight } from "../interfaces/flight.interface"
 import { httpService } from "./http.service"
-
-import { utilService } from "./util.service"
-
 const STORAGE_KEY = 'flights'
 
 export const flightService = {

@@ -1,10 +1,10 @@
 export interface Flight {
     /** Unique flight identifier. Example: AB1234 */
     flightNumber: string;
-    status:string;
+    status: string;
     takeoffTime: string;
     landingTime: string;
     takeoffAirport: string;
     landingAirport: string;
-    updates?:string;
+    updates?: string;
 }

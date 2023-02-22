@@ -1,5 +1,4 @@
 
-import { useEffect } from 'react'
 import { Flight } from '../interfaces/flight.interface'
 import { FlightPreview } from './FlightPreview'
 
@@ -9,15 +8,10 @@ type Props = {
 
 export const FlightList: React.FC<Props> = ({ flights }) => {
 
-    useEffect(() => {
-
-    }, [])
-
     return (
         <section className='flight-list'>
             <table>
                 <thead>
-
                     <tr>
                         <th>Flight Number</th>
                         <th>Status</th>
@@ -30,12 +24,10 @@ export const FlightList: React.FC<Props> = ({ flights }) => {
 
                 <tbody>
                     {flights?.map((flight) =>
-
                         <FlightPreview
                             key={flight.flightNumber}
                             flight={flight}
                         />
-
                     )}
                 </tbody>
             </table>
