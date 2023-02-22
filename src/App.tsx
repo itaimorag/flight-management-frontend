@@ -9,6 +9,7 @@ import { Flight } from './interfaces/flight.interface';
 import { AppHeader } from './cmps/AppHeader';
 import { FlightList } from './cmps/FlightList'
 import { FlightFilter } from './cmps/FlightFilter';
+import StickyHeadTable from './cmps/MuiTable'
 
 
 function App() {
@@ -41,7 +42,8 @@ function App() {
       <AppHeader />
       <div className='main-container'>
         <FlightFilter filterBy={realFlightStore.filterBy} onChangeFilter={onChangeFilter} />
-        <FlightList flights={realFlightStore.filteredFlights} />
+      <StickyHeadTable />
+        {/* <FlightList flights={realFlightStore.filteredFlights} /> */}
       </div>
     </div>
   )

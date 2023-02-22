@@ -41,8 +41,8 @@ async startFlights(){
     let updatedFlightIdx=this.flights?.findIndex((currFlight)=>currFlight?.flightNumber===flight.flightNumber)
          if(updatedFlightIdx&& updatedFlightIdx>=0&&this.flights){
              let newFlights:Flight[]=this.flights
-             console.log(`newFlights[updatedFlightIdx] = `, newFlights[updatedFlightIdx])
-             console.log(`flight = `, flight)
+            //  console.log(`newFlights[updatedFlightIdx] = `, newFlights[updatedFlightIdx])
+            //  console.log(`flight = `, flight)
               newFlights[updatedFlightIdx]=flight
               this.flights=[...newFlights]
          }
