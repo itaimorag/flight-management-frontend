@@ -14,11 +14,11 @@ import { Flight } from '../interfaces/flight.interface';
 
 
 interface Column {
-  id: 'flightNumber' | 'status' | 'takeoffTime' | 'landingTime' | 'takeoffAirport'| 'landingAirport';
+  id: 'flightNumber' | 'status' | 'takeoffTime' | 'landingTime' | 'takeoffAirport'| 'landingAirport'|'updates';
   label: string;
   minWidth?: number;
   align?: 'right';
-  format?: (value: number) => string;
+  format?: (value: string) => string;
 }
 
 const columns: readonly Column[] = [
@@ -32,6 +32,7 @@ const columns: readonly Column[] = [
   {id: 'landingTime',label: 'LandingTime',minWidth: 170,},
   {id: 'takeoffAirport',label: 'TakeoffAirport',minWidth: 170,},
   {id: 'landingAirport',label: 'LandingAirport',minWidth: 170},
+  { id: 'updates', label: 'Updates', minWidth: 150 },
 ];
 // 'flightNumber' | 'status' | 'takeoffTime' | 'landingTime' | 'takeoffAirport'| 'landingAirport';
 interface Data {
@@ -41,6 +42,7 @@ interface Data {
     landingTime: string;
     takeoffAirport: string;
     landingAirport: string;
+    alerts:string;
 }
 
 
@@ -48,15 +50,18 @@ interface Data {
 
 function StickyHeadTable() {
     const getCorrectcolor=(value:string)=>{
+        if(value.includes('Flight delayed by'))value='update'
         switch (value) {
           case 'hangar':
             return 'blue';
           case 'airborne':
             return 'green';      
           case 'malfunction':
-            return 'red';        
+            return 'red';  
+            case 'update':
+                return 'red';      
           default:
-            return 'purple';
+            return 'yello';
         }
 
     }
@@ -99,7 +104,12 @@ function StickyHeadTable() {
                     {columns.map((column,index) => {
                         const value = row[column.id];
                         return (
-                            <TableCell key={column.id} align={column.align}  style={(value==='malfunction'||value==='airborne'||value==='hangar')?{color:getCorrectcolor(value)}:{backgroundColor:'white'}} >                   
+                            <TableCell key={column.id} align={column.align} 
+                             style={(value==='malfunction'||value==='airborne'||value==='hangar'||value?.includes('Flight delayed by'))
+                             ?{color:getCorrectcolor(value)}:{color:'black'}
+                             
+                            } 
+                           >                   
                           {column.format && typeof value === 'number'
                             ? column.format(value)
                             : value}

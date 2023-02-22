@@ -15,9 +15,9 @@ import StickyHeadTable from './cmps/MuiTable'
 function App() {
   useEffect(() => {
     //you can delete the setTimeout, its only for the loader
-    setTimeout(()=>{
+    // setTimeout(()=>{
       realFlightStore.startFlights()
-    },2000)
+    // },2000)
     
     socketService.on(SOCKET_EVENT_FLIGHT_UPDATE,(flight:Flight)=>{
     realFlightStore.updateFlights(flight)

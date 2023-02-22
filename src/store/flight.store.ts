@@ -2,6 +2,7 @@ import{ observable,makeAutoObservable,action,computed} from "mobx"
 import { Flight } from "../interfaces/flight.interface"
 import { FlightFilterBy } from "../interfaces/flight-fileter.interface" 
 import { flightService } from '../services/flight.service'
+import { utilService } from "../services/util.service"
 
 export class FlightStore{
   flights:Flight[]|null=null
@@ -41,8 +42,16 @@ async startFlights(){
     let updatedFlightIdx=this.flights?.findIndex((currFlight)=>currFlight?.flightNumber===flight.flightNumber)
          if(updatedFlightIdx&& updatedFlightIdx>=0&&this.flights){
              let newFlights:Flight[]=this.flights
-            //  console.log(`newFlights[updatedFlightIdx] = `, newFlights[updatedFlightIdx])
-            //  console.log(`flight = `, flight)
+             if(newFlights[updatedFlightIdx].takeoffTime!==flight.takeoffTime||
+                newFlights[updatedFlightIdx].landingTime!==flight.landingTime){
+                    //im not deleting the flight.updates after sometime because,
+                    //  i get new info from the server if this flight changed again so it restarts the updates and
+                    // that way you can see the table is changing
+
+                    // and its called updates so if in the future i'll have some simple other updates i can show them here
+
+                flight.updates=utilService.getTimeDifference(newFlights[updatedFlightIdx].takeoffTime,flight.takeoffTime) 
+             }
               newFlights[updatedFlightIdx]=flight
               this.flights=[...newFlights]
          }

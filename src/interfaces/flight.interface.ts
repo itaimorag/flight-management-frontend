@@ -6,4 +6,5 @@ export interface Flight {
     landingTime: string;
     takeoffAirport: string;
     landingAirport: string;
+    updates?:string;
 }
