@@ -7,16 +7,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { Flight } from '../interfaces/flight.interface'
 
 import { observer } from 'mobx-react'
-import { realFlightStore } from '../store/flight.store';
-
 interface Column {
     id: 'flightNumber' | 'status' | 'takeoffTime' | 'landingTime' | 'takeoffAirport' | 'landingAirport' | 'updates';
     label: string;
     minWidth?: number;
     align?: 'right';
     format?: (value: string) => string;
+}
+type Props = {
+    flights: Flight[]
 }
 
 const columns: readonly Column[] = [
@@ -29,8 +31,7 @@ const columns: readonly Column[] = [
     { id: 'updates', label: 'Updates', minWidth: 150 },
 ];
 
-
-function StickyHeadTable() {
+function StickyHeadTable(props:Props ) {
     const getCorrectcolor = (value: string) => {
         if (value.includes('Flight delayed by')) value = 'update'
         switch (value) {
@@ -47,7 +48,7 @@ function StickyHeadTable() {
         }
 
     }
-    const rows = realFlightStore.filteredFlights
+    const rows=props.flights
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

@@ -1,35 +1,35 @@
 import './assets/main.scss'
 
-import { useEffect } from 'react'
+import { useEffect,useContext } from 'react'
 import { observer } from 'mobx-react'
-import { realFlightStore } from './store/flight.store';
 import { socketService, SOCKET_EVENT_FLIGHT_UPDATE } from './services/socket.service'
 import { Flight } from './interfaces/flight.interface';
+import { FlightStoreContext } from './store/flight.store';
 
 import { AppHeader } from './cmps/AppHeader';
-import { FlightList } from './cmps/FlightList'
 import { FlightFilter } from './cmps/FlightFilter';
 import StickyHeadTable from './cmps/MuiTable'
 
 
 function App() {
+  const flightStore = useContext(FlightStoreContext);
   useEffect(() => {
     //you can delete the setTimeout, its only for the loader
     // setTimeout(()=>{
-    realFlightStore.startFlights()
+      flightStore.startFlights()
     // },2000)
 
     socketService.on(SOCKET_EVENT_FLIGHT_UPDATE, (flight: Flight) => {
-      realFlightStore.updateFlights(flight)
+      flightStore.updateFlights(flight)
     })
 
   }, [])
 
   const onChangeFilter = (value: string) => {
-    realFlightStore.updateFlightFilter(value)
+    flightStore.updateFlightFilter(value)
   }
 
-  if (!realFlightStore.filteredFlights) return (<div className="main-app"><section className="loader-container">
+  if (!flightStore.filteredFlights) return (<div className="main-app"><section className="loader-container">
     <div className="loader">
       <div className="inner one"></div>
       <div className="inner two"></div>
@@ -38,15 +38,17 @@ function App() {
   </section></div>)
 
   return (
+    <FlightStoreContext.Provider value={flightStore}>
     <div className="main-app">
       <AppHeader />
       <div className='main-container'>
-        <FlightFilter filterBy={realFlightStore.filterBy} onChangeFilter={onChangeFilter} />
-        <StickyHeadTable />
+        <FlightFilter filterBy={flightStore.filterBy} onChangeFilter={onChangeFilter} />
+        <StickyHeadTable flights={flightStore.filteredFlights}/>
         {/* im not deleting the components of flight list and flight preview so you could look at them if you would like :) */}
-        {/* <FlightList flights={realFlightStore.filteredFlights} /> */}
+        {/* <FlightList flights={flightStore.filteredFlights} /> */}
       </div>
     </div>
+    </FlightStoreContext.Provider>
   )
 }
 

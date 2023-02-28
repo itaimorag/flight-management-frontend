@@ -4,7 +4,7 @@ import { Flight } from "../interfaces/flight.interface"
 import { flightService } from '../services/flight.service'
 import { utilService } from "../services/util.service"
 
-export class FlightStore {
+export class NewFlightStore {
     flights: Flight[] | null = null
     filterBy: string = ''
 
@@ -58,4 +58,4 @@ export class FlightStore {
     }
 
 }
-export const FlightStoreContext = createContext<FlightStore>(new FlightStore());
+export const NewFlightStoreContext = createContext<NewFlightStore>(new NewFlightStore());
